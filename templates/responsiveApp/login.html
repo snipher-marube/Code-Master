@@ -1,0 +1,73 @@
+{% include 'main.html' %}
+{% load static %}
+{% block content %}
+
+    <style type="text/css">
+        /* Login Page (START) */
+
+        #login-page-wrapper{
+            background: url(../../static/images/Background-image.png);;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #login-form-wrapper{
+            width: 400px;
+            background: #fff;
+            padding: 20px;
+            -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
+            -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
+            box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
+        }
+
+        @media screen and (max-width: 400px){
+            #login-form-wrapper{
+                width: 95%;
+            }
+        }
+
+
+        /* Login Page (END) */
+
+
+    </style>
+
+
+    <section id="login-page-wrapper">
+        <div id="login-form-wrapper">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success" role="alert">
+                            <span>{{message}}</span>
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            <span>{{message}}</span>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <h3 style="text-align: center">Member Login</h3>
+            <hr>
+            <form method="POST">
+                {% csrf_token %}
+                <label>Email</label>
+                <input class="form-control" type="email" name="email">
+                <br>
+                <label>Password</label>
+                <input class="form-control" type="password" name="password">
+                <br>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Login">
+            </form>
+
+            <br>
+            <p>Dont have an account? <a href="{% url 'register' %}">Register</a></p>
+
+        </div>
+    </section>
+
+{% endblock content %}

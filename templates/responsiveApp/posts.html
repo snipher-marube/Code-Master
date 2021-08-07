@@ -1,0 +1,193 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+
+{% block content %}
+
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+        #div_id_tags, #id_tags{
+            overflow-y: scroll;
+            max-height: 100px;
+            border-radius: 5px;
+            padding: 5px;
+            border:1px solid #888;
+        }
+        /* posts page styling */
+        /*global*/
+        h1, h2, h3, h4, h5, h6, strong{
+            color: var(--sky);
+            font-family: 'Russo One', sans-serif;
+            font-weight: 500;
+        }
+        p, li, span, label, input, textarea{
+            color: var(--sky);
+            font-family: 'Roboto Mono', monospace;
+        }
+        h1 { font-size: 56px;}
+        h2 { font-size: 36px;}
+        h3 { font-size: 28px;}
+        h4 { font-size: 24px;}
+        h5 { font-size: 20px;}
+        h6 { font-size: 16px;}
+
+/* main */
+        .main-container{
+            width: 1200px;
+            margin: 0 auto;
+
+        }
+        .post-wrapper{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 320px);
+            gap:20px;
+            justify-content: center;
+            padding-bottom: 50px;
+        }
+        .post{
+            border:1px solid var(--secondary);
+            -webkit-box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
+            -moz-box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
+            box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
+        }
+
+        .thumbnail{
+            display: block;
+            width: 100%;
+            height:150px;
+            object-fit: cover;
+        }
+
+        .post-preview{
+            background-color: #fff;
+            padding:15px;
+        }
+
+        .post-title{
+            color:black;
+            margin: 0;
+
+        }
+
+        .post-intro{
+            color:#4b5156;
+            font-size: 14px;
+        }
+
+        .tag{
+            display:inline-block;
+            color:#fff;
+            background-color: #888;
+            border-radius: 5px;
+            margin: 2px;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
+        @media screen and (max-width: 1200px){
+            .main-container{
+                width: 95%;
+            }
+        }
+
+
+    </style>
+
+
+    <div class="main-container">
+        <h1>Posts</h1>
+        {% if request.user.is_staff %}
+            <a class="btn btn-warning" href="{% url 'create_post' %}">Create Post</a>
+        {% endif %}
+        <form id="searchForm" method="GET">
+            {{myFilter.form|crispy}}
+
+            <input class="btn btn-primary" type="submit" value="search">
+        </form>
+        <br>
+        <div class="post-wrapper">
+
+
+            {% for post in posts %}
+                <div>
+                    <p>
+                        <small>Category: <a href="{% url 'category_detail' post.category.slug %}">
+                            {{ post.category }}</a>
+                        </small>
+                    </p>
+                    <div class="post">
+                        <img class="thumbnail" src="{{post.thumbnail.url}}">
+                        <div class="post-preview">
+                            <h6 class="post-title">{{post.headline}}</h6>
+                            <p class="post-intro">{{post.sub_headline}}</p>
+                            <a href="{% url 'post' post.category.slug post.slug %}">Read More</a>
+
+                            {% if request.user.is_staff %}
+                                | <a href="{% url 'update_post' post.slug %}">Edit</a>
+                                | <a href="{% url 'delete_post' post.slug %}">Delete</a>
+                            {% endif %}
+                            <hr>
+
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <h3>No posts found...</h3>
+            {% endfor %}
+        </div>
+
+        <div class="row">
+
+            {% if posts.has_other_pages %}
+
+                <ul class="pagination">
+
+                    {% if posts.has_previous %}
+                        <li class="page-item"><a data-page="{{posts.previous_page_number}}" href="?page={{posts.previous_page_number}}" class="page-link">&laquo</a></li>
+
+                        <li class="page-item"><a data-page="1" href="?page=1" class="page-link">First</a></li>
+                    {% endif %}
+
+
+                    {% for i in posts.paginator.page_range %}
+                        {% if posts.number == i %}
+                            <li class="page-item"><a class="active page-link">{{i}}</a></li>
+                        {% else %}
+                            <li class="page-item"><a data-page="{{i}}" href="?page={{i}}" class="page-link">{{i}}</a></li>
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                    {% if posts.has_next %}
+                        <li class="page-item"><a data-page="{{posts.paginator.num_pages}}" href="?page={{posts.paginator.num_pages}}" class="page-link">Last</a></li>
+
+                        <li class="page-item"><a data-page="{{posts.next_page_number}}" href="?page={{posts.next_page_number}}" class="page-link">&raquo</a></li>
+                    {% endif %}
+                </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        let searchForm = document.getElementById('searchForm')
+        let pageLinks = document.getElementsByClassName('page-link')
+
+        for(var i=0; pageLinks.length > i; i++){
+
+            pageLinks[i].addEventListener('click', function(e){
+                e.preventDefault()
+                let page = this.dataset.page
+                console.log('Page:', page)
+                searchForm.innerHTML += `<input value="${page}" name="page" hidden >`
+                searchForm.submit()
+            })
+
+        }
+    </script>
+
+{% endblock %}
+

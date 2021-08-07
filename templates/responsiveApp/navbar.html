@@ -1,0 +1,53 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+<body>
+    <!--==========Navigation==========-->
+    <nav class="nav">
+        <div class="nav-menu flex-row">
+            <div class="nav-brand">
+                <a href="{% url 'home' %}" class="text-gray">Code Master</a>
+            </div>
+
+
+            <div class="toggle-collapse">
+                <div class="toggle-icons">
+                    <i class="bi bi-bars"></i>
+                </div>
+            </div>
+
+            <!--nav items-->
+            <div>
+                <ul class="nav-items">
+                    <li class="nav-link">
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-link">
+                            <a href="{% url  'account' %}">Account</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-link">
+                            <a href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-link">
+                            <a href="{% url 'register' %}">Sign Up</a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-link">
+                        <a href="{% url 'send_email' %}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="social text-gray">
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </nav>
+<!--=======Navigation End====-->
+</body>

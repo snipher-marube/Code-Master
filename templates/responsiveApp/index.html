@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--Custom style-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <!--Font Awesome Icons-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+
+    <!--AOS Library-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aos.css' %}">
+
+    <!--Fonts-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+
+    <!--OWL- carousel-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href={% static 'css/owl.theme.default.min.css' %}>
+
+    <script data-ad-client="ca-pub-5649928206149082" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47692315-56"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-47692315-56');
+    </script>
+    <title>Code Master Blog</title>
+</head>
+<body>
+
+    <main>
+        <!--=========MAin Site Section=====-->
+        {% include 'responsiveApp/navbar.html' %}
+
+        <!------------------------ Site Title ---------------------->
+
+        <section class="site-title">
+            <div class="site-background">
+                <h3>Code & Learn</h3>
+                <h1>With Code Master</h1>
+                <a href="{% url 'posts' %}">
+                    <button class="btn">Explore</button>
+                </a>
+            </div>
+        </section>
+        <!--======Site Title Done!!====-->
+
+
+        <!-- --------------------- Blog Carousel ----------------- -->
+
+        <section>
+            <div class="blog">
+                <div class="container">
+                    <div class="owl-carousel owl-theme blog-post">
+                        <div class="blog-content">
+                            <img src="../../static/images/Blog-post/post-1.jpg" alt="post-1">
+                            <div class="blog-title">
+                                <h3>London Fashion week's continued the evolution</h3>
+                                <button class="btn btn-blog">Fashion</button>
+                                <span>2 minutes</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <img src="../../static/images/Blog-post/post-3.jpg" alt="post-1">
+                            <div class="blog-title">
+                                <h3>London Fashion week's continued the evolution</h3>
+                                <button class="btn btn-blog">Fashion</button>
+                                <span>2 minutes</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <img src="../../static/images/Blog-post/post-2.jpg" alt="post-1">
+                            <div class="blog-title">
+                                <h3>London Fashion week's continued the evolution</h3>
+                                <button class="btn btn-blog">Fashion</button>
+                                <span>2 minutes</span>
+                            </div>
+                        </div>
+                        <div class="blog-content">
+                            <img src="../../static/images/Blog-post/post-5.png" alt="post-1">
+                            <div class="blog-title">
+                                <h3>London Fashion week's continued the evolution</h3>
+                                <button class="btn btn-blog">Fashion</button>
+                                <span>2 minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="owl-navigation">
+                        <span class="owl-nav-prev"><i class="fas fa-long-arrow-alt-left"></i></span>
+                        <span class="owl-nav-next"><i class="fas fa-long-arrow-alt-right"></i></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ----------x---------- Blog Carousel --------x-------- -->
+
+        <!-- ---------------------- Site Content -------------------------->
+
+        <section class="container">
+            <div class="site-content">
+                <div class="posts">
+
+                    {% for post in posts %}
+
+                    <div class="post-content">
+                        <div class="post-image">
+                            <div>
+                                <img src="{{post.thumbnail.url}}" class="img" alt="blog1">
+                            </div>
+                            <div class="post-info flex-row">
+                                <span><i class="fas fa-user text-gray"></i>&nbsp;&nbsp;{{ post.user.name }}</span>
+                                <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;{{ post.created }}</span>
+                                <span>{{ post.postcomment_set.all.count }} Comments</span>
+                            </div>
+                        </div>
+                        <div class="post-title">
+                            <a href="{%  url 'post' post.category.slug post.slug %}">{{ post.headline }}</a>
+                            <p>{{ post.sub_headline }}</p>
+                            <p>{{ post.intro }}</p>
+                            <p>
+                                <small>Category: <a href="{% url 'category_detail' post.category.slug %}">
+                                    {{ post.category }}</a>
+                                </small>
+                            </p>
+                            <a href="{%  url 'post' post.category.slug post.slug %}">
+                                <button class="btn post-btn">Read More &nbsp; <i class="fas fa-arrow-right"></i></button>
+                            </a>
+                        </div>
+                    </div>
+                        <hr>
+                    {% endfor %}
+
+
+
+                    <div class="pagination flex-row">
+                        <a href="#"><i class="fas fa-chevron-left"></i></a>
+                        <a href="#" class="pages">1</a>
+                        <a href="#" class="pages">2</a>
+                        <a href="#" class="pages">3</a>
+                        <a href="#"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="category">
+                        <h2>Category</h2>
+                        <ul class="category-list">
+                            <li class="list-items">
+                                <a href="#">Software</a>
+                                <span>(05)</span>
+                            </li>
+                            <li class="list-items">
+                                <a href="#">Techonlogy</a>
+                                <span>(02)</span>
+                            </li>
+                            <li class="list-items">
+                                <a href="#">Lifestyle</a>
+                                <span>(07)</span>
+                            </li>
+                            <li class="list-items">
+                                <a href="#">Shopping</a>
+                                <span>(01)</span>
+                            </li>
+                            <li class="list-items">
+                                <a href="#">Food</a>
+                                <span>(08)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="popular-post">
+                        <h2>Popular Post</h2>
+                        {% for post in posts.all %}
+                        <div class="post-content">
+                            <div class="post-image">
+                                <div>
+                                    <img src="{{ post.thumbnail.url }}" class="img" alt="blog1">
+                                </div>
+                                <div class="post-info flex-row">
+                                    <span><i class="fas fa-calendar-alt text-gray"></i>&nbsp;&nbsp;{{ post.created }}
+                                        </span>
+                                    <span>{{ post.comments.count }}</span>
+                                </div>
+                            </div>
+                            <div class="post-title">
+                                <a href="{%  url 'post' post.category.slug post.slug %}">{{ post.headline }}</a>
+                                <p>{{ post.sub_headline }}</p>
+                                <p>{{ post.intro }}</p>
+                                <p>
+                                    <small>Category: <a href="{% url 'category_detail' post.category.slug %}">
+                                        {{ post.category }}</a>
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                            <hr>
+                        {% endfor %}
+
+
+
+                    <div class="newsletter">
+                        <h2>Newsletter</h2>
+                        <div class="form-element">
+                            <input type="text" class="input-element" placeholder="Email">
+                            <button class="btn form-btn">Subscribe</button>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="popular-tags">
+                        <h2>Popular Tags</h2>
+                        <div class="tags flex-row">
+                            <span class="tag">Software</span>
+                            <span class="tag">technology</span>
+                            <span class="tag">travel</span>
+                            <span class="tag">illustration</span>
+                            <span class="tag">design</span>
+                            <span class="tag">lifestyle</span>
+                            <span class="tag">love</span>
+                            <span class="tag">project</span>
+                        </div>
+                    </div>
+
+                </aside>
+            </div>
+        </section>
+
+        <!-- -----------x---------- Site Content -------------x------------>
+    </main>
+    <!---------------x------------- Main Site Section ---------------x-------------->
+
+
+    <!-- --------------------------- Footer ---------------------------------------- -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="about-us">
+                <h2>About us</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quia atque nemo ad modi officiis
+                    iure, autem nulla tenetur repellendus.</p>
+            </div>
+            <div class="newsletter">
+                <h2>Newsletter</h2>
+                <p>Stay update with our latest</p>
+                <div class="form-element">
+                    <input type="text" placeholder="Email"><span><i class="fas fa-chevron-right"></i></span>
+                </div>
+            </div>
+            <div class="instagram">
+                <h2>Instagram</h2>
+                <div class="flex-row">
+                    <img src="../../static/images/instagram/thumb-card3.png" alt="insta1">
+                    <img src="../../static/images/instagram/thumb-card4.png" alt="insta2">
+                    <img src="../../static/images/instagram/thumb-card5.png" alt="insta3">
+                </div>
+                <div class="flex-row">
+                    <img src="../../static/images/instagram/thumb-card6.png" alt="insta4">
+                    <img src="../../static/images/instagram/thumb-card7.png" alt="insta5">
+                    <img src="../../static/images/instagram/thumb-card8.png" alt="insta6">
+                </div>
+            </div>
+            <div class="follow">
+                <h2>Follow us</h2>
+                <p>Let us be Social</p>
+                <div>
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="rights flex-row">
+            <h4 class="text-gray">
+                Copyright ©2019 All rights reserved | made by
+                <a href="#" target="_blank">Daily Tuition <i class="fab fa-youtube"></i>
+                    Channel</a>
+            </h4>
+        </div>
+        <div class="move-up">
+            <span><i class="fas fa-arrow-circle-up fa-2x"></i></span>
+        </div>
+    </footer>
+
+
+</body>
+</html>
