@@ -1,0 +1,35 @@
+{% extends 'main.html' %}
+
+{% block title %}{{ category.title }} | {% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container">
+                <section class="section">
+                    <div class="columns">
+                        <div class="column is-8 is-offset-2">
+                            {% for post in category.posts.all %}
+                                <div class="content is-medium">
+                                    <a href="{% url 'post' post.category.slug post.slug %}">
+                                        <h3 class="subtitle is-4">{{ post.created}}</h3>
+                                        <img src="{{ post.thumbnail.url }}" class="img" alt="blog1">
+
+                                        <h1 class="title">{{ post.headline }}</h1>
+                                        <h2>{{ post.sub_headline }}</h2>
+                                        <p>{{ post.intro }}</p>
+
+                                    </a>
+                                </div>
+                            {% empty %}
+                                <div class="content">
+                                    <p>There is no posts in this category...</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <script data-ad-client="ca-pub-5649928206149082" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+    <!--Global site tag (gtag.js) - Google Analytics -->
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-47692315-56">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag ('config', 'UA-47692315-56');
+    </script>
+
+    <!--Custom style-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <!--Font Awesome Icons-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+
+
+    <!--AOS Library-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/aos.css' %}">
+
+    <!--Fonts-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
+
+    <!--OWL- carousel-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" type="text/css" href={% static 'css/owl.theme.default.min.css' %}>
+
+    <!-- Google Fonts--->
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&family=Russo+One&display=swap" rel="stylesheet">
+
+    <title>Code Master Blog</title>
+</head>
+<body>
+{% include 'responsiveApp/navbar.html' %}
+
+
+{% block content %}
+    <!--content goes here-->
+{% endblock %}
+
+<script type="text/javascript">
+    let static = "{% static 'css' %}"
+</script>
+
+<!-- Jquery Library file -->
+<script src="{% static 'js/Jquery3.4.1.min.js' %}"></script>
+
+<!-- --------- Owl-Carousel js ------------------->
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+
+<!-- ------------ AOS js Library  ------------------------- -->
+<script src="{% static 'js/aos.js' %}"></script>
+
+<!-- Custom Javascript file -->
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
