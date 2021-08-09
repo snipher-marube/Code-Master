@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
+
 <body>
     <!--==========Navigation==========-->
     <nav class="nav">
@@ -17,7 +17,7 @@
 
             <!--nav items-->
             <div>
-                <ul class="nav-items">
+                <ul class="nav-items" data-aos="zoom-in" data-aos-delay="400">
                     <li class="nav-link">
                         <a href="{% url 'home' %}">Home</a>
                     </li>
@@ -41,11 +41,32 @@
                     </li>
                 </ul>
             </div>
-            <div class="social text-gray">
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+
+            <div class="wrap">
+                <div class="search">
+                    <input type="text" class="searchTerm" placeholder="Search">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="social" data-aos="flip-down" data-aos-delay="500">
+                <a href="#" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
             </div>
         </div>
     </nav>

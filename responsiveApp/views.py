@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .decorators import *
+from django.db.models import Q
 
 from .forms import PostForm, CustomUserCreationForm, ProfileForm, UserForm
 from .filters import PostFilter
@@ -228,7 +229,12 @@ def updateProfile(request):
     context = {'form':form}
     return render(request, 'responsiveApp/profile_form.html', context)
 
+def search(request):
+    query = request.GET.get('query', '')
 
+    posts = Post.objects.filter(status=Post.ACTIVE).filter(Q(title__icontains=query) | Q(intro__icontains=query) | Q(body__icontains=query))
+
+    return render(request, 'responsiveApp/search.html', {'posts': posts, 'query': query})
 
 
 
