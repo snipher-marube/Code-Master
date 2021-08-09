@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 {% block content %}
 
 
@@ -13,6 +14,15 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
+        .tag{
+            display:inline-block;
+            color:#fff;
+            background-color: #264526;
+            border-radius: 5px;
+            margin: 2px;
+            padding: 2px 5px;
+            font-size: 12px;
+        }
 
         .post-container{
             width: 900px;
@@ -21,10 +31,10 @@
             padding-bottom: 20px;
         }
 
-        .comments-wrapper{
+        .comment-wrapper{
             margin-top: 50px;
             padding: 10px;
-            border:1px solid var(--borderColor);
+            border:1px solid var(--sky);
             -webkit-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
             -moz-box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
             box-shadow: -1px 1px 3px -1px rgba(0,0,0,0.75);
@@ -54,6 +64,7 @@
             font-size: 14px;
         }
 
+
         @media screen and (max-width: 900px){
             .post-container{
                 width: 95%;
@@ -67,15 +78,17 @@
             <a class="btn btn-sm btn-primary" href="{% url 'update_post' post.slug %}">Edit</a>
             <a class="btn btn-sm btn-primary" href="{% url 'delete_post' post.slug %}">Delete</a>
         {% endif %}
-
+        <h1>{{ post.headline }}</h1>
         <img class="featured_image" src="{{ post.thumbnail.url }}">
 
-        {% for tag in post.tags.all %}
-            <span class="tag">{{ tag }}</span>
-        {% endfor %}
+        <a href="{%  url 'post' post.category.slug post.slug %}">
+            {% for tag in post.tags.all %}
+                <span class="tag" >{{tag}}</span>
+            {% endfor %}
+
+        </a>
         <hr>
 
-        <h1>{{ post.headline }}</h1>
         <h4>{{ post.sub_headline }}</h4>
         <p>{{ post.intro }}</p>
         <br>
@@ -97,7 +110,7 @@
                     <input type="submit" class="btn btn-info" value="Submit comment">
                 </form>
                 {% else %}
-                <p>Creat account to comment</p>
+                <p>Create account to comment</p>
                 <a class="btn btn-primary" href="{% url 'register' %}">Register/Login</a>
             {% endif %}
         <hr>

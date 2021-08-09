@@ -7,6 +7,7 @@ urlpatterns = [
     path('<slug:category_slug>/post/<slug:slug>/', views.detail, name='post_detail'),
     path('post/<slug:slug>/', views.category, name='category_detail'),
 
+
     #CRUD PATHS
 
     path('create_post/', views.createPost, name="create_post"),

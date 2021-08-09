@@ -14,15 +14,23 @@ from .decorators import *
 
 from .forms import PostForm, CustomUserCreationForm, ProfileForm, UserForm
 from .filters import PostFilter
-
+from taggit.models import Tag
 from .models import *
 
 # Create your views here.
 def home(request):
-    posts = Post.objects.filter(active=True, featured=True)[0:3]
-    context = {'posts': posts}
+    posts = Post.objects.filter(active=True, featured=True)[0:4]
+
+
+    context = {
+        'posts': posts,
+
+    }
+
 
     return render(request, 'responsiveApp/index.html', context)
+
+
 
 def detail(request, category_slug, slug):
     post = get_object_or_404(Post, slug=slug, status=Post.ACTIVE)
@@ -32,7 +40,11 @@ def detail(request, category_slug, slug):
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = category.posts.filter(status=Post.ACTIVE)
-    return render(request, 'responsiveApp/category.html', {'category': category, 'posts': posts})
+    object_list = Category.objects.all()
+
+    
+
+    return render(request, 'responsiveApp/category.html', {'category': category, 'posts': posts, 'object_list': object_list})
 
 def posts(request):
 
@@ -67,6 +79,9 @@ def post(request, category_slug, slug):
     context = {'post': post}
 
     return render(request, 'responsiveApp/post.html', context)
+
+
+
 
 #CRUD VIEWS
 @admin_only

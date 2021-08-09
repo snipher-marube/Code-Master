@@ -9,6 +9,7 @@
 
     <!--Custom style-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/default.css' %}">
 
     <!--Font Awesome Icons-->
     <link rel="stylesheet" type="text/css" href="{% static 'css/all.css' %}">
@@ -50,8 +51,8 @@
 
         <section class="site-title">
             <div class="site-background">
-                <h3>Code & Learn</h3>
-                <h1>With Code Master</h1>
+                <h3 class="page-intro">Code & Learn</h3>
+                <h1 class="page-intro">With Code Master</h1>
                 <a href="{% url 'posts' %}">
                     <button class="btn">Explore</button>
                 </a>
@@ -159,28 +160,17 @@
                 <aside class="sidebar">
                     <div class="category">
                         <h2>Category</h2>
+
                         <ul class="category-list">
+                            {% for post in posts %}
                             <li class="list-items">
-                                <a href="#">Software</a>
-                                <span>(05)</span>
+                                <a href="{% url 'category_detail' post.category.slug  %}">{{ post.category }}</a>
+                                <span>{{ category.posts_count }}</span>
                             </li>
-                            <li class="list-items">
-                                <a href="#">Techonlogy</a>
-                                <span>(02)</span>
-                            </li>
-                            <li class="list-items">
-                                <a href="#">Lifestyle</a>
-                                <span>(07)</span>
-                            </li>
-                            <li class="list-items">
-                                <a href="#">Shopping</a>
-                                <span>(01)</span>
-                            </li>
-                            <li class="list-items">
-                                <a href="#">Food</a>
-                                <span>(08)</span>
-                            </li>
+                            {% endfor %}
+
                         </ul>
+
                     </div>
 
                     <div class="popular-post">
@@ -216,8 +206,13 @@
                     <div class="newsletter">
                         <h2>Newsletter</h2>
                         <div class="form-element">
-                            <input type="text" class="input-element" placeholder="Email">
-                            <button class="btn form-btn">Subscribe</button>
+                            <form enctype="multipart/form-data" method="post" action="/newsletter/code-master/subscribe/">
+                                {% csrf_token %}
+
+                                <input class="input-element" placeholder="Email" type="email" name="email_field" required="" id="id_email_field">
+                                <button class="btn form-btn" id="id_submit" name="submit" value="Subscribe" type="submit">Subscribe</button>
+                            </form>
+
                         </div>
                     </div>
                     </div>
@@ -225,6 +220,11 @@
                     <div class="popular-tags">
                         <h2>Popular Tags</h2>
                         <div class="tags flex-row">
+                            {% for tag in post.tags.all %}
+                                <span  class="badge badge-success">#{{tag}}</span>
+                            {% endfor %}
+
+
                             <span class="tag">Software</span>
                             <span class="tag">technology</span>
                             <span class="tag">travel</span>
@@ -258,7 +258,19 @@
                 <h2>Newsletter</h2>
                 <p>Stay update with our latest</p>
                 <div class="form-element">
-                    <input type="text" placeholder="Email"><span><i class="fas fa-chevron-right"></i></span>
+                    <form enctype="multipart/form-data" method="post" action="/newsletter/code-master/subscribe/">
+                        {% csrf_token %}
+
+                        <input class="input-element" placeholder="Email" type="email" name="email_field" required="" id="id_email_field">
+
+
+                                <button  id="id_submit" name="submit" value="Subscribe" type="submit">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+
+
+                    </form>
+
                 </div>
             </div>
             <div class="instagram">

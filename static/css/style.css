@@ -151,8 +151,9 @@ main .site-title .site-background{
     text-align: center;
     color: var(--white);
 }
-main .site-title h1 h3{
+main .site-title h1 h3 .page-intro{
     margin: .3rem;
+    color: var(--white)
 }
 main .site-title .btn{
     margin: 1.8rem;
