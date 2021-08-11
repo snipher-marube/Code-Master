@@ -1,1 +1,1 @@
-web: gunicorn ResponsiveWebsite.wsg
+web: gunicorn ResponsiveWebsite.wsgi
