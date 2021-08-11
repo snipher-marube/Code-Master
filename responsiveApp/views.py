@@ -11,18 +11,27 @@ from django.contrib import messages
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .decorators import *
+from django.db.models import Q
 
 from .forms import PostForm, CustomUserCreationForm, ProfileForm, UserForm
 from .filters import PostFilter
-
+from taggit.models import Tag
 from .models import *
 
 # Create your views here.
 def home(request):
-    posts = Post.objects.filter(active=True, featured=True)[0:3]
-    context = {'posts': posts}
+    posts = Post.objects.filter(active=True, featured=True)[0:4]
+
+
+    context = {
+        'posts': posts,
+
+    }
+
 
     return render(request, 'responsiveApp/index.html', context)
+
+
 
 def detail(request, category_slug, slug):
     post = get_object_or_404(Post, slug=slug, status=Post.ACTIVE)
@@ -32,7 +41,11 @@ def detail(request, category_slug, slug):
 def category(request, slug):
     category = get_object_or_404(Category, slug=slug)
     posts = category.posts.filter(status=Post.ACTIVE)
-    return render(request, 'responsiveApp/category.html', {'category': category, 'posts': posts})
+    object_list = Category.objects.all()
+
+    
+
+    return render(request, 'responsiveApp/category.html', {'category': category, 'posts': posts, 'object_list': object_list})
 
 def posts(request):
 
@@ -67,6 +80,9 @@ def post(request, category_slug, slug):
     context = {'post': post}
 
     return render(request, 'responsiveApp/post.html', context)
+
+
+
 
 #CRUD VIEWS
 @admin_only
@@ -111,7 +127,9 @@ def deletePost(request, slug):
     context = {'item': post}
     return render(request, 'responsiveApp/delete.html', context)
 
+def contact_us(request):
 
+    return render(request, 'responsiveApp/contact.html')
 
 def sendEmail(request):
 
@@ -213,7 +231,15 @@ def updateProfile(request):
     context = {'form':form}
     return render(request, 'responsiveApp/profile_form.html', context)
 
+def search(request):
+    query = request.GET.get('query', '')
 
+    posts = Post.objects.filter(status=Post.ACTIVE).filter(Q(headline__icontains=query) |
+                                                           Q(sub_headline__icontains=query) |
+                                                           Q(intro__icontains=query) |
+                                                           Q(body__icontains=query))
+
+    return render(request, 'responsiveApp/search.html', {'posts': posts, 'query': query})
 
 
 

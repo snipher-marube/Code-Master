@@ -7,7 +7,6 @@
 {% block content %}
 
     <style type="text/css">
-        @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
         #div_id_tags, #id_tags{
             overflow-y: scroll;
             max-height: 100px;
@@ -15,95 +14,21 @@
             padding: 5px;
             border:1px solid #888;
         }
-        /* posts page styling */
-        /*global*/
-        h1, h2, h3, h4, h5, h6, strong{
-            color: var(--sky);
-            font-family: 'Russo One', sans-serif;
-            font-weight: 500;
-        }
-        p, li, span, label, input, textarea{
-            color: var(--sky);
-            font-family: 'Roboto Mono', monospace;
-        }
-        h1 { font-size: 56px;}
-        h2 { font-size: 36px;}
-        h3 { font-size: 28px;}
-        h4 { font-size: 24px;}
-        h5 { font-size: 20px;}
-        h6 { font-size: 16px;}
-
-/* main */
-        .main-container{
-            width: 1200px;
-            margin: 0 auto;
-
-        }
-        .post-wrapper{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, 320px);
-            gap:20px;
-            justify-content: center;
-            padding-bottom: 50px;
-        }
-        .post{
-            border:1px solid var(--secondary);
-            -webkit-box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
-            -moz-box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
-            box-shadow: -2px 7px 21px -9px rgba(0,0,0,1.75);
-        }
-
-        .thumbnail{
-            display: block;
-            width: 100%;
-            height:150px;
-            object-fit: cover;
-        }
-
-        .post-preview{
-            background-color: #fff;
-            padding:15px;
-        }
-
-        .post-title{
-            color:black;
-            margin: 0;
-
-        }
-
-        .post-intro{
-            color:#4b5156;
-            font-size: 14px;
-        }
-
-        .tag{
-            display:inline-block;
-            color:#fff;
-            background-color: #888;
-            border-radius: 5px;
-            margin: 2px;
-            padding: 2px 5px;
-            font-size: 12px;
-        }
-        @media screen and (max-width: 1200px){
-            .main-container{
-                width: 95%;
-            }
-        }
-
-
     </style>
+
 
 
     <div class="main-container">
         <h1>Posts</h1>
         {% if request.user.is_staff %}
-            <a class="btn btn-warning" href="{% url 'create_post' %}">Create Post</a>
+            <a class="btn btn-warning" href="{% url 'create_post' %}">
+                <button class="btn" style="background-color: yellow;">Create Post</button>
+            </a>
         {% endif %}
         <form id="searchForm" method="GET">
             {{myFilter.form|crispy}}
 
-            <input class="btn btn-primary" type="submit" value="search">
+            <input class="btn btn-primary" type="submit" value="search" style="background-color: #678467; color: white;">
         </form>
         <br>
         <div class="post-wrapper">
@@ -128,6 +53,9 @@
                                 | <a href="{% url 'delete_post' post.slug %}">Delete</a>
                             {% endif %}
                             <hr>
+                            {% for tag in post.tags.all %}
+                                <span class="tag" >#{{tag}}</span>
+                            {% endfor %}
 
                         </div>
                     </div>

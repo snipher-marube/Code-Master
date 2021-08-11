@@ -8,11 +8,11 @@ html,body{
 :root{
 
     /*      Theme colors        */
-    --text-gray: #3f4954;
+    --text-gray: #54533f;
     --text-light : #686666da;
     --bg-color: #0f0f0f;
     --white: #ffffff;
-    --midnight: #104f55;
+    --midnight: #232220;
 
     /* gradient color   */
     --sky: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -37,17 +37,11 @@ a{
 ul{
     list-style-type: none;
 }
-h1{
-    font-size: 2.5rem;
-    font-family: var(--Lexend);
-}
+
 h2{
     font-family: var(--Lexend);
 }
-h3{
-    font-family: var(--Abel);
-    font-size: 1.3rem;
-}
+
 button.btn{
     border: none;
     border-radius: 20px;
@@ -79,6 +73,7 @@ p{
     min-height: 10vh;
     overflow: hidden;
     transition: height 1s ease-in-out;
+    position: fixed;
 }
 .nav .nav-menu{
     justify-content: space-between;
@@ -126,15 +121,17 @@ p{
     font-family: 'Rancho', sans-serif;
 }
 .nav .social{
-    padding: 2rem 0;
-}
-.nav .social i{
     padding: 1rem;
 
 }
+.nav .social i{
+    padding: 1rem;
+}
+
 .nav .social i:hover{
     color: indianred;
 }
+
 
 /*=======Main Content-------*/
 
@@ -151,8 +148,9 @@ main .site-title .site-background{
     text-align: center;
     color: var(--white);
 }
-main .site-title h1 h3{
+main .site-title .page-intro{
     margin: .3rem;
+    color: var(--white)
 }
 main .site-title .btn{
     margin: 1.8rem;

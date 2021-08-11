@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Search | {% endblock %}
+
+{% block content %}
+
+    <div class="main-container">
+
+            <h1>Search results</h1>
+            <hr>
+            <h3>Query "{{ query }}"</h3>
+        </div>
+    <div class="post-wrapper">
+
+        {% for post in posts %}
+            <div>
+                <div class="post">
+                    <div class="content is-medium">
+                        <a href="{% url 'post' post.category.slug post.slug %}">
+
+                            <a class="post-title">{{ post.headline }}</a>
+                            <img class="thumbnail" src="{{post.thumbnail.url}}">
+                            <a>{{ post.sub_headline }}</a>
+                            <p class="intro">{{ post.intro }}</p>
+                            <a href="{% url 'post' post.category.slug post.slug %}">Read More</a>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="content">
+                <p>No result for the given query...</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

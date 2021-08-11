@@ -1,5 +1,5 @@
 from django.db import models
-
+from taggit.managers import TaggableManager
 from django.contrib.auth.models import User
 
 
@@ -35,6 +35,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -48,6 +49,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return '/%s/' % self.slug
+
 
 class Post(models.Model):
     ACTIVE = 'active'
