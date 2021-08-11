@@ -50,9 +50,11 @@
         <!------------------------ Site Title ---------------------->
 
         <section class="site-title">
-            <div class="site-background" data-aos="zoom-in" data-aos-delay="200">
-                <h3 class="page-intro">Code & Learn</h3>
-                <h1 class="page-intro">With Code Master</h1>
+            <div class="site-background" data-aos="zoom-in" data-aos-delay="100">
+                <h3 class="page-intro" style="font-size: 2.5rem;
+    font-family: var(--Lexend); color: white">Code & Learn</h3>
+                <h1 class="page-intro" style="font-family: var(--Abel);
+    font-size: 1.3rem; color :white;">With Code Master</h1>
                 <a href="{% url 'posts' %}">
                     <button class="btn">Explore</button>
                 </a>
@@ -68,7 +70,7 @@
                 <div class="container">
                     <div class="owl-carousel owl-theme blog-post">
                         {% for post in posts %}
-                        <div class="blog-content" data-aos="fade-left" data-aos-delay="200">
+                        <div class="blog-content" data-aos="fade-left" data-aos-delay="100">
 
                             <img src="{{ post.thumbnail.url }}" alt="post-1">
                             <div class="blog-title">
@@ -280,18 +282,31 @@
                 <h2>Follow us</h2>
                 <p>Let us be Social</p>
                 <div>
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-youtube"></i>
+                    <a target="_blank" href="https://github.com/snipher-marube">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a target="_blank" href="https://www.linkedin.com/in/snipher-marube-956159188/">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a target="_blank" href="https://twitter.com/SnipherMarube">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a target="_blank" href="https://www.instagram.com/snipher_marube/">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a target="_blank" href="https://www.youtube.com/channel/UC_y320qQnVT9XhRsDiXAEfA">
+                        <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="rights flex-row" data-aos="flip-up" data-aos-delay="200">
+        <div class="rights flex-row" data-aos="flip-up" data-aos-delay="50">
             <h4 class="text-gray">
-                Copyright ©2019 All rights reserved | made by
-                <a href="#" target="_blank">Daily Tuition <i class="fab fa-youtube"></i>
-                    Channel</a>
+                Copyright ©2021 All rights reserved | made by
+                <a href="https://www.youtube.com/channel/UC_y320qQnVT9XhRsDiXAEfA" target="_blank">snipherDev
+                    <i class="fab fa-youtube"style="color: red;"></i>
+                    Channel
+                </a>
             </h4>
         </div>
         <div class="move-up" data-aos="flip-up" data-aos-delay="800">

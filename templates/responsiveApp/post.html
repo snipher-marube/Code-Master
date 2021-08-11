@@ -73,10 +73,18 @@
     </style>
 
     <div class="post-container">
-        <a class="btn btn-sm btn-primary" href="{% url 'posts'  %}">&laquo Back to Posts</a>
+
+        <a class="btn btn-sm btn-primary" href="{% url 'posts'  %}">
+            <button class="btn" style="background-color: yellow;">
+                &laquo Back to Posts to </button>
+        </a>
         {% if request.user.is_staff %}
-            <a class="btn btn-sm btn-primary" href="{% url 'update_post' post.slug %}">Edit</a>
-            <a class="btn btn-sm btn-primary" href="{% url 'delete_post' post.slug %}">Delete</a>
+            <a class="btn btn-sm btn-primary" href="{% url 'update_post' post.slug %}">
+                <button class="btn" style="background-color:green;">Edit </button>
+            </a>
+            <a class="btn btn-sm btn-primary" href="{% url 'delete_post' post.slug %}">
+                <button class="btn" style="background-color: red;"> Delete </button>
+            </a>
         {% endif %}
         <h1>{{ post.headline }}</h1>
         <img class="featured_image" src="{{ post.thumbnail.url }}">

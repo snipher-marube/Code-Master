@@ -13,7 +13,10 @@
         }
     </style>
     <div class="main-container">
-        <a class="btn btn-sm btn-primary" href="{% url 'posts' %}">&laquo Back to Posts</a>
+        <a class="btn btn-sm btn-primary" href="{% url 'posts' %}">
+            <button class="btn" style="background-color: yellow;">
+                &laquo Back to Posts</button>
+        </a>
 
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -23,5 +26,7 @@
 
         </form>
     </div>
+    <br>
+    <br>
 
 {% endblock content %}

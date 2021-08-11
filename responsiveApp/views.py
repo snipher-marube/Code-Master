@@ -127,7 +127,9 @@ def deletePost(request, slug):
     context = {'item': post}
     return render(request, 'responsiveApp/delete.html', context)
 
+def contact_us(request):
 
+    return render(request, 'responsiveApp/contact.html')
 
 def sendEmail(request):
 
@@ -232,7 +234,10 @@ def updateProfile(request):
 def search(request):
     query = request.GET.get('query', '')
 
-    posts = Post.objects.filter(status=Post.ACTIVE).filter(Q(title__icontains=query) | Q(intro__icontains=query) | Q(body__icontains=query))
+    posts = Post.objects.filter(status=Post.ACTIVE).filter(Q(headline__icontains=query) |
+                                                           Q(sub_headline__icontains=query) |
+                                                           Q(intro__icontains=query) |
+                                                           Q(body__icontains=query))
 
     return render(request, 'responsiveApp/search.html', {'posts': posts, 'query': query})
 
